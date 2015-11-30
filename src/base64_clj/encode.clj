@@ -66,8 +66,8 @@
                (nil? c2) BASE64_PAD
                (nil? c3) (tbl-at (bit-and (bit-shift-left  c2 2) 0x3C)) 
                :else     (tbl-at (bit-or
-                                   (bit-and (bit-shift-left  c2 2) 0x3C)
-						                       (bit-and (bit-shift-right c3 6) 0x03)))))
+                                  (bit-and (bit-shift-left  c2 2) 0x3C)
+                                  (bit-and (bit-shift-right c3 6) 0x03)))))
         ;; encode char4
         e4 (fn [c3]
              (cond
