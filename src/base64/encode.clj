@@ -1,4 +1,4 @@
-(ns base64-clj.encode
+(ns base64.encode
   { :doc "BASE64 encod/decode libraries."
     :author "Michio Nakagawa <michio.nakagawa@gmail.com>"})
 

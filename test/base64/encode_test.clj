@@ -1,8 +1,8 @@
-(ns base64-clj.encode_test
+(ns base64.encode_test
   { :doc "BASE64 encod/decode libraries test."
     :author "Michio Nakagawa <michio.nakagawa@gmail.com>"}
   (:require [clojure.test :refer :all]
-            [base64-clj.encode :refer :all]))
+            [base64.encode :refer :all]))
 
 (deftest tbl-at-test
   (testing "0 is A"

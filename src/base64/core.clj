@@ -1,7 +1,7 @@
-(ns base64-clj.core
+(ns base64.core
   { :doc "main"
     :author "Michio Nakagawa <michio.nakagawa@gmail.com>"}
-  (:require [base64-clj.encode :refer :all]))
+  (:require [base64.encode :refer :all]))
 
 (defn basic-tests []
   (let [TEXTS ["a", "ab", "abc", "abcd", "Hello, clojure.", "I love clojure", "Clojureは楽しいね!"]]
