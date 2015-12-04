@@ -41,7 +41,7 @@
   [& args]
   (if (empty? args)
     (do
-	    (basic-tests)
-	    (performance-tests))
-	  (doseq [arg args]
-	    (println (bytes-to-string (encode-string arg))))))
+      (basic-tests)
+      (performance-tests))
+    (doseq [arg args]
+      (println (bytes-to-string (encode-string arg))))))

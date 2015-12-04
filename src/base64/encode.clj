@@ -64,17 +64,17 @@
         e1 #(tbl-at (bit-and (shr % 2) 0x3F))
         ;; encode char2
         e2 #(cond
-               (nil? %2) (tbl-at (bit-and (shl %1 4) 0x30))
-               :else     (tbl-at (bit-or  (bit-and (shl %1 4) 0x30) (bit-and (shr %2 4) 0x0F))))
+              (nil? %2) (tbl-at (bit-and (shl %1 4) 0x30))
+              :else     (tbl-at (bit-or  (bit-and (shl %1 4) 0x30) (bit-and (shr %2 4) 0x0F))))
         ;; encode char3
         e3 #(cond
-               (nil? %1) BASE64_PAD
-               (nil? %2) (tbl-at (bit-and (shl  %1 2) 0x3C)) 
-               :else     (tbl-at (bit-or  (bit-and (shl %1 2) 0x3C) (bit-and (shr %2 6) 0x03))))
+              (nil? %1) BASE64_PAD
+              (nil? %2) (tbl-at (bit-and (shl  %1 2) 0x3C)) 
+              :else     (tbl-at (bit-or  (bit-and (shl %1 2) 0x3C) (bit-and (shr %2 6) 0x03))))
         ;; encode char4
         e4 #(cond
-               (nil? %) BASE64_PAD
-	             :else (tbl-at (bit-and % 0x3F)))
+              (nil? %) BASE64_PAD
+	      :else (tbl-at (bit-and % 0x3F)))
         [c1 c2 c3] array]
     ;; writing 4 characters of BASE64.
     (conj [] (e1 c1) (e2 c1 c2) (e3 c2 c3) (e4 c3))))
@@ -100,30 +100,30 @@
 "This function is an algorithm of BASE64 decoding.Decoding to process by 4 characters unit."
   [^bytes array]
   (let [
-      ;; decode char1
-      d1 #(bit-or (bit-and (shl  %1 2) 0xFC) (bit-and (shr %2 4) 0x03))
-      ;; decode char2
-      d2 #(bit-or (bit-and (shl  %1 4) 0xF0) (bit-and (shr %2 2) 0x0F))
-      ;; decode char3
-      d3 #(bit-or (bit-and (shl  %1 6) 0xC0) (bit-and %2 0x3F))
-      [c1 c2 c3 c4] array
-      _c1 (tbl-of c1)
-      _c2 (tbl-of c2)
-      _c3 (tbl-of c3)
-      _c4 (tbl-of c4)]
-  ;; writing 1-3 characters of string.
-  (cond
-    (and (=    BASE64_PAD c3) (= BASE64_PAD c4)) (conj [] (d1 _c1 _c2))
-    (and (not= BASE64_PAD c3) (= BASE64_PAD c4)) (conj [] (d1 _c1 _c2) (d2 _c2 _c3))
-    :else                                        (conj [] (d1 _c1 _c2) (d2 _c2 _c3) (d3 _c3 _c4)))))
+        ;; decode char1
+        d1 #(bit-or (bit-and (shl  %1 2) 0xFC) (bit-and (shr %2 4) 0x03))
+        ;; decode char2
+        d2 #(bit-or (bit-and (shl  %1 4) 0xF0) (bit-and (shr %2 2) 0x0F))
+        ;; decode char3
+        d3 #(bit-or (bit-and (shl  %1 6) 0xC0) (bit-and %2 0x3F))
+        [c1 c2 c3 c4] array
+        _c1 (tbl-of c1)
+        _c2 (tbl-of c2)
+        _c3 (tbl-of c3)
+        _c4 (tbl-of c4)]
+    ;; writing 1-3 characters of string.
+    (cond
+      (and (=    BASE64_PAD c3) (= BASE64_PAD c4)) (conj [] (d1 _c1 _c2))
+      (and (not= BASE64_PAD c3) (= BASE64_PAD c4)) (conj [] (d1 _c1 _c2) (d2 _c2 _c3))
+      :else                                        (conj [] (d1 _c1 _c2) (d2 _c2 _c3) (d3 _c3 _c4)))))
 
 (defn decode
-	"Convert to string(8bit) byte array from BASE64(6bit) byte array."
-	[^bytes array]
-	(loop [result [] partitions (partition-all 4 array)]
-	  (if (nil? (first partitions))
-	    (byte-array result)
-	    (recur (into result (read-base64 (first partitions))) (rest partitions)))))
+  "Convert to string(8bit) byte array from BASE64(6bit) byte array."
+  [^bytes array]
+  (loop [result [] partitions (partition-all 4 array)]
+    (if (nil? (first partitions))
+      (byte-array result)
+      (recur (into result (read-base64 (first partitions))) (rest partitions)))))
 
 (defmacro decode-string
   "Convert to string(8bit) byte array from BASE64(6bit) string."
