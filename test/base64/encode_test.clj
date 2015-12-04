@@ -1,6 +1,6 @@
 (ns base64.encode_test
   { :doc "BASE64 encod/decode libraries test."
-    :author "Michio Nakagawa <michio.nakagawa@gmail.com>"}
+   :author "Michio Nakagawa <michio.nakagawa@gmail.com>"}
   (:require [clojure.test :refer :all]
             [base64.encode :refer :all]))
 
@@ -23,12 +23,12 @@
 (deftest string-to-bytes-test
   (testing "A is 0"
     (are [n] (= "ABC" (String. (string-to-bytes n)))
-    "ABC")))
+         "ABC")))
 
 (deftest bytes-to-string-test
   (testing "A is 0"
     (are [^bytes n] (= "ABC" (bytes-to-string n))
-    (.getBytes "ABC"))))
+         (.getBytes "ABC"))))
 
 (deftest write-base64-test
   (testing "encode 'A'"

@@ -1,6 +1,6 @@
 (ns base64.encode
   { :doc "BASE64 encod/decode libraries."
-    :author "Michio Nakagawa <michio.nakagawa@gmail.com>"})
+   :author "Michio Nakagawa <michio.nakagawa@gmail.com>"})
 
 ;;
 ;; Constants.
@@ -86,7 +86,7 @@
     (if (nil? (first partitions))
       (byte-array result)
       (recur (into result (write-base64 (first partitions))) (rest partitions)))))
- 
+
 (defmacro encode-string
   "Convert to BASE64(6bit) byte array from string."
   [x]
@@ -97,7 +97,7 @@
 ;;
 
 (defn read-base64
-"This function is an algorithm of BASE64 decoding.Decoding to process by 4 characters unit."
+  "This function is an algorithm of BASE64 decoding.Decoding to process by 4 characters unit."
   [^bytes array]
   (let [
         ;; decode char1

@@ -1,6 +1,6 @@
 (ns base64.core
   { :doc "main"
-    :author "Michio Nakagawa <michio.nakagawa@gmail.com>"}
+   :author "Michio Nakagawa <michio.nakagawa@gmail.com>"}
   (:require [base64.encode :refer :all]))
 
 (defn basic-tests []
